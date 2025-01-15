@@ -3,14 +3,14 @@ class Todo {
   final String title;
   final String description;
   final String category;
-  bool isCompleted;
+  final String isCompleted;
 
   Todo({
     required this.id,
     required this.title,
     required this.description,
     required this.category,
-    this.isCompleted = false,
+    this.isCompleted = 'Uncompleted',
   });
 
   Map<String, dynamic> toJson() => {
@@ -20,6 +20,15 @@ class Todo {
         'category': category,
         'isCompleted': isCompleted,
       };
+
+  @override
+  String toString() {
+    return 'id: $id, title: $title, description: $description, category: $category, isCompleted: $isCompleted';
+  }
+
+  bool isCompletedBool () {
+    return isCompleted == 'Completed';
+  }
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
@@ -36,7 +45,7 @@ class Todo {
     String? title,
     String? description,
     String? category,
-    bool? isCompleted,
+    String? isCompleted,
   }) {
     return Todo(
       id: id ?? this.id,

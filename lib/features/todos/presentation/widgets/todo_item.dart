@@ -18,7 +18,7 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(todo.id),
-      startActionPane: ActionPane(
+      endActionPane: ActionPane(
         motion: ScrollMotion(),
         children: [
           SlidableAction(
@@ -30,7 +30,7 @@ class TodoItem extends StatelessWidget {
           ),
         ],
       ),
-      endActionPane: ActionPane(
+      startActionPane: ActionPane(
         motion: ScrollMotion(),
         children: [
           SlidableAction(
@@ -38,23 +38,42 @@ class TodoItem extends StatelessWidget {
             backgroundColor: Colors.green,
             foregroundColor: Colors.white,
             icon: Icons.check,
-            label: todo.isCompleted ? 'Undo' : 'Complete',
+            label: todo.isCompletedBool() ? 'Undo' : 'Complete',
           ),
         ],
       ),
-      child: ListTile(
-        title: Text(
-          todo.title,
-          style: TextStyle(
-            decoration: todo.isCompleted
-                ? TextDecoration.lineThrough
-                : TextDecoration.none,
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey[300]!,
+              width: 1,
+            ),
           ),
         ),
-        subtitle: Text(todo.description),
-        trailing: Icon(
-          todo.isCompleted ? Icons.check_circle : Icons.circle_outlined,
-          color: todo.isCompleted ? Colors.green : Colors.grey,
+        child: ListTile(
+          title: Text(
+            todo.title,
+            style: TextStyle(
+              fontSize: 20,
+              decoration: todo.isCompletedBool()
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
+            ),
+          ),
+          subtitle: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('${todo.description} for ', style: TextStyle(fontSize: 16)),
+              Text('${todo.category}',
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ],
+          ),
+          trailing: Icon(
+            todo.isCompletedBool() ? Icons.check_circle : Icons.circle_outlined,
+            color: todo.isCompletedBool() ? Colors.green : Colors.grey,
+          ),
         ),
       ),
     );
