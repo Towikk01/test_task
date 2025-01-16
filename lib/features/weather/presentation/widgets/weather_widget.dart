@@ -25,22 +25,27 @@ class WeatherWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    Text('City: ${weather.cityName}'),
-                    Text('Temperature: ${weather.temperature}°C'),
-                    Text('Condition: ${weather.description}'),
-                    Text('Wind Speed: ${weather.wind} m/s'),
-                    Image.network(
-                        'http://openweathermap.org/img/wn/${weather.icon}@2x.png'),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text(weather.cityName,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(weather.description,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('${weather.temperature.toStringAsFixed(1)}°C',
+                          style: TextStyle(fontSize: 48)),
+                      Image.network(
+                          'http://openweathermap.org/img/wn/${weather.icon}@2x.png'),
+                    ],
+                  ),
+                  Text('Wind Speed: ${weather.wind} m/s',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                ],
               ),
               SizedBox(
                 height: 10,

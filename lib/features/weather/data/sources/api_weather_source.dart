@@ -2,6 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:test_task/core/utils/constants.dart';
 
+
+//good practice to create a separate class for the API calls
+//we use dio for making the API calls
+//i choose dio because it is easy to use and has a lot of features like interceptors, transformers, etc.
+
 class WeatherApi {
   static const apiKey = API_KEY;
   final Dio dio = Dio();
